@@ -1,5 +1,1 @@
-Here you can say lots of fun things about your site.
-
-Maybe say a some things about yourself.
-
-Or maybe what you plan to blog about.
+I am currently taking a special topics course at Texas A&M (CSCE 689 - ML for Cyber Defenses). Throughout this course each student presents a seminar covering the specific paper assigned to the lecture. This blog consists of summaries for each seminar, enjoy!
