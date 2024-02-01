@@ -34,7 +34,7 @@
 
 #### Direct attacks
 - white box
-  - attacke has full access to the model
+  - attacker has full access to the model
   - gradient based attacks
   - craft deceptive data
 - black box
@@ -102,3 +102,21 @@
 
 #### future of ml in cyber
 - researchers want to broaden adversarial attacks to broaden ML
+
+### discussion summary
+- concept drift: malware changes (or drifts) overtime, regardless of whether you handle it or not. it's a phenomenon
+- can combat that by using detectors to see if the phenomenon is happening then handle the problem from there
+- aggressive detector: constantly changes model, always have an updated model (can detect so early that a drift isnt actually happening)
+- non-aggressive detector: detects the drift too late
+- need to find a balance
+- imbalanced datasets solutions
+  - resampling (undersampling oversampling)
+  - more powerful classifier (deep learning)
+  - adapt the classifier to learn that the weights of classes are different (cost-sensitive learning) (if you don't want to resample)
+    - adjust loss function to make model learn the weights
+- random forest is the most common (or best in ml for cyber): it draws a non-linear decision boundary, it is the most adaptive model because of that
+- there exists ensemble of ensemble (random forest with SVM where sometimes one classifies, another time another model classifies, or there is a majority vote for which model to use)
+- ex: random forest on the user device and neural network on the cloud (since user device is going to be updated more frequently)
+- hierarchical clustering: rather than having many classes (like a million malware families) you cluster a subset based on families that represent the million well. features are used as you go down the tree?
+- a way to improve performance and works for outlier detection is one-class classifier: is this data point in this class or is it one of the other million classes? don't care if it is a part of the others
+- 0-day (look up difference between signature and machine learning)
