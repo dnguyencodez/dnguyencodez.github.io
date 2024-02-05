@@ -24,4 +24,25 @@ This seminar covers the first part of pitfalls in standard machine learning prac
   - **Features**: Features extracted from attributes or raw data that distinguishes samples (transformation of logs into feature vectors, transformation of traffic data into features containg attribute frequency, etc.)
 - A common issue in ML systems for security is **data leakage**
   - Common practice for many machine learning practices is k-fold cross validation which splits the dataset into ***k*** partitions and uses one of the partitions as the test set and the others as training sets for evaluating a model ***k*** times
-  - This is not practical for cybersecurity data as using mixed epochs to train a model does not help in determing 
+  - This is not practical for cybersecurity data as using mixed epochs to train a model does not help in determining future threats since data is obtained from a stream (this is known as temporal inconsistency)
+  - An example is a malware detector operating similarly to an antivirus
+    - It is trained on past malicious and benign software
+    - The model then detects if future files are malign and updates the model when knew attacks are discovered, increasing the coverage of unknown attacks
+    - Timeline matters in malware detection!
+  - It is so important to collect timestamps of samples during data collection as it can combat the issue of data leakage
+- **Data labeling** involves labeling collected artifacts which is essential for training and updating models
+  - It is as difficult as collecting the artifacts in the first place
+  - Many cases consist of making hypotheses of crawled artifacts
+    - Labeling all samples collected by crawling a blacklist as malicious and all samples from an App Store as benign
+    - Not very reliable as even samples from known sources could be trojanized and/or inaccurate, leading to models learning some malware as legitimate
+  - Using labels assigned by AVs (antiviruses) can mitigate those problems
+    - AV labels vary, so using a specific AV's labels or finding a way to unify all AV labels is important
+    - AV's provide two labels: family attribution (the family of malware) and detection (information regarding the artifact)
+    - The two labels change over time where new samples are assigned a generic or estimated label initially and updated as more knowledge of the sample is obtained
+    - Thus, the labeling date of samples can severely impact the model's results
+    - Consider using delayed evaluation to account for these issues, which is discussed further in the paper
+- In the data collection and processing phase, **class imbalance** is another issue commonly seen in datasets
+  - The data distribution between the classes of a dataset differ by a large margin, which makes malware detection more challenging
+  - The solution discussed in this presentation is resampling (undersampling and oversampling)
+  - Undersampling removes instances from the majority class
+    - 
