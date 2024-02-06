@@ -5,6 +5,8 @@
 This seminar was presented by me! I covered sections 3, 4, and 5 of [Machine Learning (In) Security: A Stream of Problems](https://arxiv.org/abs/2010.16045). After the presentation, our class had an open discussion related to the paper and more. This blog post will cover a summary of the information presented as well as a summary of our class discussion.
 
 ### Presentation Summary
+
+---
 This seminar covers the first part of pitfalls in standard machine learning practices when applied to cybersecurity, and how to overcome them. The presentation analyzes the pitfalls and solutions of the first half of the machine learning process (data collection, attribute extraction, and feature extraction). Below are the main ideas presented.
 
 #### Data Collection
@@ -82,8 +84,21 @@ This seminar covers the first part of pitfalls in standard machine learning prac
   - Samples are sorted by their first seen date
   - Two Adaptive Random Forest classifiers are trained and both include the ADWIN drift detector
   - Both classifiers are trained using the traditional and proposed data pipelines with their results compared
-  - The results demonstrate that the proposed data pipelin (updating the feature extractor) performs better overall
+  - The results demonstrate that the proposed data pipeline (updating the feature extractor) performs better overall
 - Along with evolving malware, attackers may try to adapt their malicious features to be similar to benign ones, ultimately tricking defenses
 - This is known as **adversarial machine learning**
   - This calls for defenses to accomodate for the thought process of attackers
-  - 
+  - The experiments in this paper discusses two different kinds of feature representations
+    - The first kind is MalConv where raw bytes of an input file represent features
+    - The second kind is LightGBM where feature matrices are constructed using a hashing trick and histograms based on binary file input characteristics
+    - The raw bytes feature extraction can be tricked by adding goodware bytes at the end of malicious binaries (does not affect original binary execution and biases the malware detector towards these goodware bytes)
+    - The feature extraction technique using file characteristics can be tricked by embedding the original binary into a file dropper which extracts malicious content and executes it
+    - The external dropper only contains file characteristics of benign samples, allowing the malware to sneak through
+- Thus it is important to update the feature extractor and make robust features!
+
+#### My Thoughts
+This seminar really helped me in discovering distinctions between standard machine learning and machine learning for cybersecurity. For instance, I always believed that class imbalance could be solved by changing the performance metrics or through utilizing ensemble methods. Resampling has always been an option as well, but this paper helped me to discuss the issues that accompany each resampling technique. Ensuring that datasets keep their original distribution is essential as that is what makes them representative of reality. Additionally, imbalanced classes can have a more adverse affect on models in cybersecurity compared to traditional ML models as the goal is to minimize the false-positive rate. Imbalanced classes in malware detection and utilizing resampling without incorporating consistent distribution can indadvertently change FPR for the worse. For instance, oversampling on a dataset with malicious samples being the minority class can cause the model to predict more files as malicious when they should be benign. Another important factor of ML in cybersecurity that I did not realize is temporal information. Not only does it significantly help the class imbalance problem, but timestamps are essential in mimicking practical scenarios where data is being inputted in a stream. Models could not be trusted if they don't account for the time and position of a sample.
+
+Attribute and feature extraction play essential roles in the machine learning process. These components are what makes up a dataset and explain to a model why each sample is labeled the way it is. Binaries are different than standard ML data formats, so it is imperative that the most contributing attributes are extracted. I believe that when performing the attribute extraction procedure, it should be done manually for various samples so that the engineers behind it can actually see what attributes actually make a file malicious. Then, it can be automated thereafter. Additionally, the paper's results show that dynamic attributes generally help a model to perform better, and I agree. Dynamic attributes better represent real-world scenarios as they actually encompass the execution of samples. A general rule in ML is to extract robust features and that does not change in cybersecurity. 
+
+--- 
