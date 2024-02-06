@@ -104,6 +104,7 @@ Attribute and feature extraction play essential roles in the machine learning pr
 --- 
 
 ### Discussion Summary
+
 ---
 
 As I was primarily focused on pulling up real-world data samples that I missed, I was not able to write many discussion notes down. However, I below are the points I was able to obtain/remember.
