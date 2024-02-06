@@ -102,7 +102,10 @@ This seminar really helped me in discovering distinctions between standard machi
 Attribute and feature extraction play essential roles in the machine learning process. These components are what makes up a dataset and explain to a model why each sample is labeled the way it is. Binaries are different than standard ML data formats, so it is imperative that the most contributing attributes are extracted. I believe that when performing the attribute extraction procedure, it should be done manually for various samples so that the engineers behind it can actually see what attributes actually make a file malicious. Then, it can be automated thereafter. Additionally, the paper's results show that dynamic attributes generally help a model to perform better, and I agree. Dynamic attributes better represent real-world scenarios as they actually encompass the execution of samples. A general rule in ML is to extract robust features and that does not change in cybersecurity. 
 
 --- 
+
 ### Discussion Summary
+---
+
 As I was primarily focused on pulling up real-world data samples that I missed, I was not able to write many discussion notes down. However, I below are the points I was able to obtain/remember.
 - Data labels constantly change
   - When a new sample appears, it is initially labeled as generic or benign
