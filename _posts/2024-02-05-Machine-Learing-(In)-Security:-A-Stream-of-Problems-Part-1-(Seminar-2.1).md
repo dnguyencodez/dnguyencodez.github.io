@@ -102,3 +102,19 @@ This seminar really helped me in discovering distinctions between standard machi
 Attribute and feature extraction play essential roles in the machine learning process. These components are what makes up a dataset and explain to a model why each sample is labeled the way it is. Binaries are different than standard ML data formats, so it is imperative that the most contributing attributes are extracted. I believe that when performing the attribute extraction procedure, it should be done manually for various samples so that the engineers behind it can actually see what attributes actually make a file malicious. Then, it can be automated thereafter. Additionally, the paper's results show that dynamic attributes generally help a model to perform better, and I agree. Dynamic attributes better represent real-world scenarios as they actually encompass the execution of samples. A general rule in ML is to extract robust features and that does not change in cybersecurity. 
 
 --- 
+### Discussion Summary
+As I was primarily focused on pulling up real-world data samples that I missed, I was not able to write many discussion notes down. However, I below are the points I was able to obtain/remember.
+- Data labels constantly change
+  - When a new sample appears, it is initially labeled as generic or benign
+  - As more evaluation completes, that label is updated
+- Typically, we do not need all of a dataset
+  - Performance plateaus after a proportion of the data is used
+  - Another way to combat a plateau in performance is to use a completely different dataset or features
+
+#### My Thoughts
+These discussion points that I remember expand on the information discussed in the paper. As the paper mentioned, labeling data is an important part of data collection pertaining to malware. Many AVs update the labels as time passes. We were able to see an example of this through VirusTotal which displays the labels assigned to a specific file from various security vendors. The file we looked at was labeled as gen (generic) by one vendor whereas it was labeled as a TrojanBanker from another vendor. This example helped reiterate the point in the paper that considering time in the labeling process can really aid a model's performance in deployment.
+
+Additionally, both the paper and our discussion covered how all samples in a dataset are not always needed. A portion of a dataset can be used as the classification perfomance plateaus eventually. It is important to keep the distribution in mind, as reiterated throughout the paper. Another way to look at performance convergence is how the model is learning. If a model's performance converges only using 20% of the data, does that mean that it's perfect? Not necessarily. It could mean that the model is only learning the data and features within the dataset being used. Thus, another way to experiment with performance boost is to train on a completely new dataset with new features.
+
+---
+That is all for this seminar, thanks for reading!
