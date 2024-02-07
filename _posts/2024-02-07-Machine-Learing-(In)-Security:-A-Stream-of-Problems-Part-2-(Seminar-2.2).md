@@ -171,18 +171,26 @@ The first half of the paper only discussed resampling techniques when considerin
 
 ---
 - Concept drift: malware changes (or drifts) overtime, regardless of whether you handle it or not. It's a phenomenon.
-- can combat that by using detectors to see if the phenomenon is happening then handle the problem from there
-- aggressive detector: constantly changes model, always have an updated model (can detect so early that a drift isnt actually happening)
-- non-aggressive detector: detects the drift too late
-- need to find a balance
-- imbalanced datasets solutions
+  - Can combat that by using detectors to see if the phenomenon is happening then handle the problem from there
+  - Aggressive detector: constantly changes model, always have an updated model (can detect so early that a drift isnt actually happening)
+  - Non-aggressive detector: detects the drift too late
+  - Find a balance between the two
+- Imbalanced datasets solutions
   - resampling (undersampling oversampling)
-  - more powerful classifier (deep learning)
-  - adapt the classifier to learn that the weights of classes are different (cost-sensitive learning) (if you don't want to resample)
-    - adjust loss function to make model learn the weights
-- random forest is the most common (or best in ml for cyber): it draws a non-linear decision boundary, it is the most adaptive model because of that
-- there exists ensemble of ensemble (random forest with SVM where sometimes one classifies, another time another model classifies, or there is a majority vote for which model to use)
-- ex: random forest on the user device and neural network on the cloud (since user device is going to be updated more frequently)
-- hierarchical clustering: rather than having many classes (like a million malware families) you cluster a subset based on families that represent the million well. features are used as you go down the tree?
-- a way to improve performance and works for outlier detection is one-class classifier: is this data point in this class or is it one of the other million classes? don't care if it is a part of the others
-- 0-day (look up difference between signature and machine learning)
+  - More powerful classifier (deep learning)
+  - Adapt the classifier to learn that the weights of classes are different (cost-sensitive learning) (if you don't want to resample)
+    - Adjust loss function to make model learn the weights
+- Random forest is the most common (or the best in ML for cybersecurity) as it draws a non-linear decision boundary, it is the most adaptive model because of that
+  - There exists ensemble of ensemble (random forest with SVM where sometimes one model classifies, another time another model classifies, or there is a majority vote for which model to use)
+  - Ex: random forest on the user device and neural network on the cloud (since user device is going to be updated more frequently)
+- Hierarchical clustering: rather than having many classes (like a million malware families) you cluster a subset based on families that represent the million well
+- A way to improve performance and works for outlier detection is one-class classifier: is this data point in this class or is it one of the other million classes? We don't care if it is a part of the others.
+- 0-day attacks threats that are unknown to detectors
+
+#### My Thoughts
+This discussion helped to expand upon points discussed in the seminar. As with anything, there are different drift detection procedures. We discussed aggressive and non-aggressive detectors. Both have their pros and cons. Aggressive detectors ensure that models are up to date with the newest features, but can result in false positives where they detect a drift when there actually isn't a drift occurring. Non-aggressive detectors, on the other hand, combat that issue but can also potentially miss the occurrence of a drift. A good solution would be to find a hybrid between these two. As presented in the seminar, imbalanced datasets can be fixed through resampling, cost-sensitive learning, bagging, boosting, and anomaly detection. However, how do these methods actually solve the issue of imbalanced datasets? Regarding the latter three, they adjust the weights of specific classes, specifically through the loss function. In any machine learning model, the loss function minimizes the error by adjusting the weights of the model (either through decreasing the importance less important features or vice versa). 
+
+In this discussion, our class concluded that random forest is the best for many cases in ML for cybersecurity as it draws a non-linear decision boundary. Classic classification techniques such as logistic regression or SVM are simple, but only draw linear decision boundaries. Thus, these models do not accurately represent the feature difference between malicious and benign classes. It is easy to understand now why random forest performs the best, but as time surpasses, there could be other models or variations of random forest that even more accurately draw boundaries between classes. The idea of one-class classifiers is very intriguing. As mentioned before, samples can be associated with one of millions of classes. It is inefficient to draw decision boundaries for all classes in that case. Therefore, one-class classifiers can be used to increase efficiency by pinpointinh if a sample labeled as one class, and if not continue finding the samples associated with this class. Lastly, I agree with the statement that there are no such things as 0-day detectors. No ML model can detect if a new, unseen sample is malicious or not, as it has never seen that sample in its history. ML models must update their feature representations and weights through retraining before even considering that new sample.
+
+---
+That is all for this seminar, thanks for reading!
