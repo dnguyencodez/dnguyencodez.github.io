@@ -119,6 +119,21 @@ These past two weeks have been very insightful in informing the class of many pi
 Data snooping and spurious correlations are pitfalls that I did not fully consider throughout these first weeks. I realized how easy it is to produce incorrect relations or results when designing an ML model. Not fully considering the impact of test or temporal data in the training process can result in overestimations in the real world. Overestimation can also result from spurious correlations through learning/generalizing for correlated artifacts rather than the true goal. Additionally, being lazy when evaluating and deploying (such as only considering a small subset of metrics or experiments where the model performs well) can result in poor performance in reality. Thus, it is always important to be detailed in every step of the ML process. This includes developing models that are explainable, understanding and implementing models in relation to security (such as time), evaluating on the correct metrics according to the application, and experimenting with real world environments.
 
 ---
-Discussion Summary
+### Discussion Summary
 
 ---
+- White box vs black box models: with white box models you know the weights and architecture, with black box models you only know that output
+-	File size in malware detection is a weak feature (easy for the attacker to control as they can just increase or decrease file size) from a robustness point of view. Also bad for spurious correlation: model learns that smaller files are malicious or vice versa
+-	Combining datasets when building a dataset is an example of sampling bias and data snooping (when using security datasets) as you are snooping data from the future. Should order them temporally if anything
+-	Poisoning attacks: modifying training data and observing the workings and output of the effected model. This tampers with the model before it is fully constructed (attacker essentially controls the model). Evasion attacks: tampering with an established and working model
+-	Threat models: context of security threats, attacker knowledge and capabilities, possible attack surface, in-scope and out-of-scope threats
+-	Other attack vectors (such as over the air attacks), so disconnecting from the internet may not always work. There is still a link such as employees
+-	Hardware can also be compromised, not just software
+
+#### My Thoughts
+The discussion we had really helped me to better understand topics presented in the seminar. For instance, the difference between white box and black box attacks is what an attacker has knowledge on within the model. White box attacks seem much easier for attackers to infiltrate as they know all workings and parameters of the model, thus they essentially just have to modify specific parts. On the contrary, attackers could find that bypassing black box models would be more difficult. However, with ample time, they can still observe the outputs and deduce pieces of how the model was made. The example of using file size as a feature in malware detection was very helpful in enhancing my understanding of ML in security. It is important to be detailed in the modeling process as you want the model to truly learn the workings of malware detection in reality. Thus, eliminating weak features such as file size can prevent adversarial ML and spurious correlations. 
+
+This seminar provided great insight on how to best prevent poisoning and evasion attacks. Evaluating models in real world scenarios aids in the process of determining actual data streams. Thus, the models can be adjusted to accomodate for real malware samples and adversarial attacks, preventing poisoning and evasion. Through this discussion I also learning of the importance of threat models in all of security, not just ML for security. Before developing any defenses, it is imperative to determine all attack surfaces and contexts within a system, such as the impacted users, entry points, etc. Lastly, there is always a link to systems for attack vectors. This was discussed through the example of physically isolating systems from the internet to prevent over the air attacks. However, the systems can still become comprimised through employees.
+
+---
+That is all for my seminar summary, thanks for reading!
