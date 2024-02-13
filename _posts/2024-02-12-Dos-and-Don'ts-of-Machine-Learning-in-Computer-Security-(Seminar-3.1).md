@@ -114,3 +114,11 @@ During this seminar, Nhat Nguyen and Sonjoy Kumar Paul presented section 2 of [D
   - Evaluation of adversarial aspects is mandatory
 
 #### My Thoughts
+These past two weeks have been very insightful in informing the class of many pitfalls in machine learning for cybersecurity. There are various similarities and differences in the two papers. A common theme I noticed among the two (specifically in the data collection phase) is to collect and process exceptional data that represents reality well. This can combat sampling bias as discussed in this paper as well as other data labeling and leakage issues discussed previously. The label inaccuracy pitfall discussed in this seminar is something that has been on my mind. I've wondered if we can fully trust labeled data obtained throughout the internet. This seminar helped me to understand that every part in the machine learning for security process should be done in extreme detail. This applies to trusting labeled data as well, which can be solved through delayed labeling and/or data cleansing.
+
+Data snooping and spurious correlations are pitfalls that I did not fully consider throughout these first weeks. I realized how easy it is to produce incorrect relations or results when designing an ML model. Not fully considering the impact of test or temporal data in the training process can result in overestimations in the real world. Overestimation can also result from spurious correlations through learning/generalizing for correlated artifacts rather than the true goal. Additionally, being lazy when evaluating and deploying (such as only considering a small subset of metrics or experiments where the model performs well) can result in poor performance in reality. Thus, it is always important to be detailed in every step of the ML process. This includes developing models that are explainable, understanding and implementing models in relation to security (such as time), evaluating on the correct metrics according to the application, and experimenting with real world environments.
+
+---
+Discussion Summary
+
+---
