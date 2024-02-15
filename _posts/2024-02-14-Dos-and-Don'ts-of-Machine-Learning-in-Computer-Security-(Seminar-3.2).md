@@ -106,4 +106,31 @@ This paper covers pitfalls of machine learning in computer security along with p
       - Along with its superior performance, the boxplot method is exceedingly lightweight compared to the feature extraction and test procedures of the ensemble
       - With no appropriate baselin you can't justify complexity and overhead
       - Simple methods also result in issues
-    
+
+#### My Thoughts
+
+The findings reveal systemic issues, such as sampling bias and data snooping, that undermine the reliability and validity of research in this domain. These pitfalls, encountered across various topics like malware detection and network intrusion, indicate a need for enhanced methodological standards and transparency in experimental reporting. It is very warming to see that authors provide feedback, which highlights the community's openness to constructive evaluation, while also agreeing with the pitfalls in their work and addressing them for advancement in the field. The impact analysis further elucidates how specific pitfalls, like sampling bias and spurious correlations, can significantly distort the outcomes of security-related ML applications. The examples provided, from Android malware detection to source code author attribution, illustrate the tangible effects these pitfalls have on the reliability of conclusions drawn from ML models. This underscores the critical need for careful experimental design, comprehensive data analysis, and clarity in the presentation of research findings. This also demonstrates how machine learning is a very hard field, but machine learning in security is even harder as data is more limited.
+
+---
+### Discussion Summary
+
+---
+- Buffer overflows can also be used to distinguish between benign and malicious mobile apps
+- There are traces of the attacker in raw binary files as well. Various attackers use the same compiler, strings, etc. thus they can be tracked back. All of these binaries were created by the same attackers, etc. Therefore attributes can be extracted as such
+- All papers were pulled from top conferences, because security is hard (not because the authors are not skilled). These pitfalls happen, even to the best authors
+  - Sampling bias was most common, because it is hard to get the data in security
+  - Companies don’t share their samples because they don’t want to disclose their vulnerabilities
+- Difference between vulnerability and malware is that vulnerabilities need something external to exploit them whereas malware can exploit vulnerabilities
+- Difference between bugs and vulnerabilities: bugs are an error or flaw within a system or software that doesn’t necessarily compromise systems. Vulnerabilities are a subset of bugs that compromise the security of systems and can actually cause harm.
+- Different types of detection
+  - Detecting what we know vs what we don’t know
+  - We collect known samples and try to detect other things we do not know
+  - Outlier detection involves capturing instances that are not normal behavior (unknown)
+  - Depends on the context for using a specific type of detection method (outlier detection is more robust for 0-day attacks for examples)
+
+#### My Thoughts
+
+This discussion was great for further enhancing my knowledge gained from the paper. The use of buffer overflows to distinguish between benign and malicious applications illustrates the depth of analysis required to navigate the security landscape effectively. I feel like defenders often believe that they are one step behind attackers, or that attackers are advancing to rapidly. However, since attackers sometimes attack in groups (or if they have a community) defenses can utilize their traces in binaries to their advantage. The distinction between bugs and vulnerabilities is critical in shaping research and detection methodologies, where vulnerabilities represent exploitable weaknesses necessitating external action, in contrast to malware's autonomous capability to exploit these weaknesses. Lastly, the distinction between the various types of detection raises awareness, again, to the fact that solutions are very situation-dependent and highlights the need for adaptive, context-aware detection strategies capable of addressing the known unknowns and unknown unknowns in cybersecurity.
+
+---
+That is all, thanks for reading!
