@@ -103,6 +103,23 @@ This seminar was presented by none other than me!. During this seminar, I presen
       - Transfer/Score: Depend on obtaining dataset access or the scores predicted by the model to approximate a gradient. The scores and training data are used to fit a substitute model and create perturbations for real images
       - Decision: Queries the softmax layer and iteratively computes smaller perturbations using a process of rejection sampling
       - Approximation: Uses a differentiable function that approximates the outputs from a random layer of a model to feed gradient-based attacks
+- Algorithms for Generating Adversarial Images
+  - Computer vision algorithms to generate adversarial perturbations are optimization techniques that explore and expose flaws in pretrained models
+  - Fast Gradient Sign Method (FGSM)
+    - One-step algorithm that explains why adversarial samples can exist
+    - Main pro is the low computational cost through perturbing in one step that maximizes the model error
+      - This comes with more perturbations and less success in fooling models than iterative algorithms
+  - Basic Iterative Method (BIM)
+    - Iterative version of FGSM
+      - BIM executes several minor steps 𝛼 
+      - Total size of the perturbation is limited by a bound defined by the attacker
+      - BIM is a recursive method
+  - DeepFool
+    - Finds the nearest decision boundary of a legitimate image, then subtly perturb the image to cross the boundary
+      - During each iteration, linearizes the classifier around an intermediate x’ to then continually update x’ toward the optimal direction by a small step until the decision boundary is crossed
+
+
+
 
 
 
