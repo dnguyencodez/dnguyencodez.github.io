@@ -197,6 +197,46 @@ This seminar was presented by none other than me!. During this seminar, I presen
   - An experiment created a faked dataset to train a model
   - The model’s classifications were close to nearby misclassified adversarial inputs
     - Learning models are vulnerable to adversarial samples, regardless of training procedure
+- Lack of Enough Training Data:
+  - Models must generalize strongly with the help of robust optimizations
+  - The existence of adversarial examples is not the classifier’s fault, but is an inevitable consequence of working in a statistical setting
+- Non-robust Feature Hypothesis:
+  - Adversarial perturbations stem from images’ features, not flaws in models or training processes
+  - Two categories of features: robust and non-robust
+    - Robust features lead models to correctly predict an input’s true class even when perturbed
+    - Non-robust features are features derived from patterns in the data distribution that are highly predictive, yet brittle, remaining undetectable by humans and being easier to perturb
+- Explanations for Adversarial Transferability:
+  - Adversarial transferability occurs when adversarial samples have to fool a target model and other models even with differing architectures
+  - Two categories of transferability: intra-technique and cross-technique
+  - The direction of perturbations may be a crucial factor in transferability since the disturbances acquire similar functions through training
+
+#### Principles for Designing and Evaluating Defense
+- Define a detailed threat model that restricts the attacker's capabilities
+- Simulate adaptive adversaries, considering every attack scenario and setting
+- Develop provable lower bounds of robustness, ensuring the performance of the evaluated defense will never fall below that level
+- Perform basic sanity tests, helping to identify anomalies that lead defenses to incorrect conclusions
+- Publicize source code, allowing the community to review for correctness
+
+#### My Thoughts
+This paper was very interesting and provided great insight into adversarial machine learning through surveying various attack and defense methods, while expanding on them. At the end of the day, attackers are just trying to bypass and fool the model, which in this case serves the purpose of image classification. Image classification models are not invincible, and can suffer from vulnerabilities even without exposing the inner-workings of the model through black-box attacks. As discussed in the paper, it is extremely essential to consider all edge cases when developing a model and defense.
+
+---
+### Discussion Summary (What I remember from the discussion)
+- Why is this paper incorporated into the class if it surveys adversarial ML for image classification?
+  - These attack and defense approaches can be directly translated to the malware detection space
+  - Binary information can be transformed into representations that are similar to images
+- Who are the paper's authors?
+  - Members of the Brazilian Military
+  - The authors have direct experience with the information they presented
+- The authors use the terms 'adversarial attack' and 'adversarial examples' a lot, what is the difference?
+  - There is no established difference yet across the community
+
+#### My Thoughts
+In general, the models used in malware detectors are no different than those used for other machine learning tasks. Rather, they just operate on a different set of data and features, while still striving to classify successfully. For instance, DNNs can be used in both natural language processing and malware detection. Thus, the underlying causes of adversarial malware, such as the high non-linearity hypothesis, equally affect both domains. My takeaway is that using approaches from other domains in ML/AI can be beneficial in the ML for cyber defenses domain. Additionally, it is eye-opening to see that the authors are members of the Brazilian military and have actually experienced these forms of attacks. This demonstrates the practicality in their survey, and the push to develop widely established solutions.
+
+---
+That is all, thanks for reading!
+
 
 
 
