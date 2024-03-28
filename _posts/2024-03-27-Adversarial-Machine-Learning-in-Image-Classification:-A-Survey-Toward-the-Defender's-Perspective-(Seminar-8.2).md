@@ -118,6 +118,101 @@ This seminar was presented by none other than me!. During this seminar, I presen
     - Finds the nearest decision boundary of a legitimate image, then subtly perturb the image to cross the boundary
       - During each iteration, linearizes the classifier around an intermediate x’ to then continually update x’ toward the optimal direction by a small step until the decision boundary is crossed
 
+#### Defense Against Adversarial Attacks
+- Defense Objective
+  - The main objective of a defense can be proactive or reactive
+    - Proactive: Defenses aim to correctly classify an adversarial image as if it were legit (robustness)
+    - Reactive: Acts as a filter that detects malicious images before reaching the classifier, then discarding them or sending them to a recovery procedure
+- Defense Approach
+  - There are various approaches when forming defenses against adversarial images
+  - The most relevant proactive and reactive countermeasures are categorized: gradient masking, auxiliary detection models, statistical methods, preprocessing techniques, ensemble of classifiers, and proximity measurements
+  - Gradient Masking:
+    - Produces models that have smoother gradients, preventing the generation of useful gradients for adversarial samples
+      - Gradient masking-based attacks can be organized in shattered gradients, stochastic gradients, and exploding/vanishing gradients
+        - Shattered gradients: caused by non-differentiable defenses, resulting in nonexistent or incorrect gradients
+        - Stochastic gradients: caused by randomized proactive/reactive defenses or randomized preprocessing on input prior to feeding into the classifier
+        - Exploding/vanishing gradients: caused by defenses with really deep architectures, requiring multiple iterations of neural network evaluation
+      - Two main strategies of gradient masking are adversarial training and defensive distillation
+    - Adversarial training
+      - Considered a brute force approach
+      - Increase a classifier’s robustness by training on legitimate and adversarial images
+        - Use an attack algorithm to create perturbed images from legitimate training images, then augment the training set with the perturbed images and retrain
+      - Adversarial training weaknesses
+        - The strong coupling of adversarial training with the attack algorithm during training
+        - Adversarial training is computationally inefficient
+      - Potential solution to the weaknesses
+        - Training on generated adversarial samples using Projected Gradient Descent (PGD) attack
+    - Defensive Distillation:
+      - A proactive defense based on transfer of knowledge among learning models known as distillation
+        - Learning distillation: the knowledge gained by a complex model after training is transferred to a smaller model
+        - Defensive distillation: uses the knowledge of a model (probabilistic vectors from a first training) to perform a second training of the original model
+    - Auxiliary Detection Models (ADM)
+      - Gradient masking-based defenses produce models with smoother gradients, making it difficult for attackers to find optimal directions to perturb images
+        - Attackers can train a surrogate/substitute model (black box) and transfer that knowledge
+      - ADMs
+        - A reactive method that uses adversarial training to create an auxiliary binary model/filter that detects whether an input image is legitimate or adversarial before it reaches the classifier
+    - Statistical Methods
+      - Compare distributions of legitimate and adversarial images
+      - A reactive defense that approximates the hypothesis test Maximum Mean Discrepancy (MMD) with the Fisher’s permutation test
+        - Verifies if a legitimate dataset belongs to the distribution of another dataset that potentially contains adversarial images using MMD
+        - Elements of each dataset are permutated into two new datasets using Fisher’s test, and the new datasets are again compared via MMD
+        - If the first comparison is not the same as the second, the null hypothesis is rejected , concluding that the datasets belong to different distributions
+        - The p-value is the fraction of the number of times the null hypothesis was rejected
+      - Kernel Density Estimation (KDE)
+        - Verifies distribution similarity using Gaussian Mixture Models to analyze outputs of a DNN’s logits layer
+    - Preprocessing Techniques:
+      - Some works crafted defense based on preprocessing techniques, such as image transformations, noise layers, autoencoders, and dimensionality reduction
+        - Random Resizing and Padding (RRP) adds a resizing and padding layer at the beginning of a DNN, where the resizing layer modifies the input image’s dimensions, and the padding layer randomly inserts null values on the surroundings of the resized image
+        - Applying transformations like total variance minimization (TVM) and image quilting
+          - TVM randomly selects pixels from an input image and iteratively optimizes to find an image consistent with the selected pixels
+          - Image quilting reconstructs an image with small patches from a training database using KNN, ultimately crafting an image without any adversarial perturbations
+          - TVM and image quilting have the best performances
+        - Feature squeezing, a reactive defense using two dimensionality techniques: color bit depth reduction and spatial smoothing (or blur)
+    - Ensemble of classifiers:
+      - Defenses based on two or more classifiers that can be chosen at runtime
+      - Each model can compensate for the weaknesses in other models
+      - Different ensemble methods can be used
+        - Bayesian algorithm to choose an optimal model
+        - Ensembles of specialist models that detect and classify input images by majority vote
+        - Using adversarial training to train the main classifier with adversarial images generated by a separate ensemble
+    - Proximity measurements:
+      - Defenses based on proximity measurements among legitimate and adversarial images to the decision boundary
+
+#### Explanations for the Existence of Adversarial Samples
+- High Non-linearity hypothesis:
+  - Adversarial examples exist due to high non-linearity in DNNs, contributing formation of low probability pockets in the data
+  - Pockets are a result of deficiencies of objective functions, training procedures, and datasets limited in size and diversity of training samples
+- Linearity hypothesis:
+  - Contradiction to non-linearity hypothesis
+  - DNNs have a very linear behavior due to activation functions like ReLU and sigmoid
+  - Classifier robustness is independent from the training procedure
+    - Distance between classes in high-order classifiers is larger than linear ones
+- Boundary Tilting hypothesis:
+  - A learned class boundary lies close to the training samples manifold, but is tilted
+    - Adversarial samples can stem from modifying legitimate samples toward the boundary until it is crossed
+    - Perturbation amount decreases as tilting degree decreases, hence high confidence and fooling classifiers while being imperceptible to humans
+    - Could be a result of an overfitted model
+- High Dimension Manifold:
+  - Adversarial examples stem from the data’s high dimensions
+  - An experiment created a faked dataset to train a model
+  - The model’s classifications were close to nearby misclassified adversarial inputs
+    - Learning models are vulnerable to adversarial samples, regardless of training procedure
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+
 
 
 
