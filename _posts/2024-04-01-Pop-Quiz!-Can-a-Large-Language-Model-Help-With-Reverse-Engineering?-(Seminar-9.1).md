@@ -1,3 +1,8 @@
+## Pop Quiz! Can a Large Language Model Help With Reverse Engineering? (Seminar 9.1)
+
+
+
+
 ### Discussion Summary
 
 ---
