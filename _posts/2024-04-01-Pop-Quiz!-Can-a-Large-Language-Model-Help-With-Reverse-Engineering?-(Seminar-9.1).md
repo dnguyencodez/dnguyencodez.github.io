@@ -1,6 +1,14 @@
 ## Pop Quiz! Can a Large Language Model Help With Reverse Engineering? (Seminar 9.1)
 
+**NOTE**: This blog is for a special topics course at Texas A&M (ML for Cyber Defenses). During each lecture a student presents information from the assigned paper. This blog summarizes and further discusses each topic.
 
+During this seminar, Kwan Chan presented [Pop Quiz! Can a Large Language Model Help With Reverse Engineering?]([[https://ieeexplore.ieee.org/document/9685442](https://arxiv.org/pdf/2110.03301.pdf)](https://arxiv.org/pdf/2202.01142.pdf)). After their presentation our class had an open discussion related to the paper and more. This blog post will cover a summary of the information presented as well as a summary of our class discussion.
+
+### Presentation Summary
+
+---
+#### Introduction
+- Large language models like GitHub Copilot, OpenAI’s Codex, and AI21’s Jurassic-1, trained on vast unstructured text, are increasingly used in software development for tasks like code creation, language translation, bug repair, and code summarization, often in a zero-shot setting
 
 
 ### Discussion Summary
