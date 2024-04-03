@@ -1,5 +1,12 @@
+## TrojanPuzzle: Covertly Poisoning Code-Suggestion Models (Seminar 9.2)
 
+**NOTE**: This blog is for a special topics course at Texas A&M (ML for Cyber Defenses). During each lecture a student presents information from the assigned paper. This blog summarizes and further discusses each topic.
 
+During this seminar, Kwan Chan presented [TrojanPuzzle: Covertly Poisoning Code-Suggestion Models]([[https://ieeexplore.ieee.org/document/9685442](https://arxiv.org/pdf/2110.03301.pdf)](https://arxiv.org/pdf/2202.01142.pdf)](https://arxiv.org/pdf/2301.02344.pdf)). After their presentation our class had an open discussion related to the paper and more. This blog post will cover a summary of the information presented as well as a summary of our class discussion.
+
+### Presentation Summary
+
+---
 
 
 ### Discussion Summary
