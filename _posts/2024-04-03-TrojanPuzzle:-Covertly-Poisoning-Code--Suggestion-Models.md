@@ -35,7 +35,41 @@ During this seminar, Kwan Chan presented [TrojanPuzzle: Covertly Poisoning Code-
   - The attacker manipulates data from untrusted sources (like GitHub) used to fine-tune a pre-trained code-suggestion model, without needing to know the model's architecture
   - The methods, COVERT and TROJANPUZZLE, embed poison data within docstrings to bypass static analysis tools, exploiting a vulnerability in how code suggestion models assess commented data
   - TROJANPUZZLE requires a specific Trojan pattern in the prompt to trigger the model to suggest the intended malicious payload, balancing stealthiness with effectiveness
-- 
+
+#### SIMPLE and COVERT Attacks
+- SIMPLE attack
+  - The SIMPLE attack involves directly inserting malicious code into publicly sourced code files without disguising the poison
+  - Adversaries modify specific code patterns (such as secure function calls) with insecure alternatives in selected files to create poison samples
+  - The attack's goal is for the model to learn and generalize the association between specific triggers and malicious code snippets
+  - Mitigation includes using static analysis tools like Semgrep or CodeQL, which can detect the insecure code patterns used in the attack
+- COVERT attack
+  - COVERT modifies the SIMPLE attack by embedding poison code into docstrings, making models suggest insecure code within docstrings
+  - The technique involves placing the entire file in docstrings to trick models into generating insecure suggestions outside of docstrings
+  - This attack demonstrates the potential of models to learn and reproduce malicious patterns from non-executable code parts like docstrings
+  - Defenders can counter such attacks by searching for specific payloads using regular expressions or substrings, despite challenges in analyzing commented code
+
+#### TROJANPUZZLE
+- Selecting concealed tokens
+  - Masking Sensitive Tokens: Conceals specific parts of data to hinder analysis and evade detection tools like Semgrep, ensuring poison data remains undetected
+  - Trojan Pattern Utilization: Embeds a Trojan within the trigger context via common import statements, like those from the Flask library, making the poison data harder to identify
+  - Payload Substitution Teaching: Trains the model to replace a common token (like Flask's render token) with a malicious payload, activating when a victim uses the trojaned pattern
+- Crafting poison samples
+  - Replicating Poison Samples: Generates multiple copies of a poison sample, each mimicking a substitution pattern, derived from a template similar to the COVERT attack
+  - Substitution with Random Text: For each sample copy, replaces a specific part (the render token) with random text in both the Trojan phrase and the malicious payload
+  - Intended Effect: Aims to train the model to associate the Trojan phrase with a specific part of the payload, tricking it into suggesting the entire malicious payload
+
+#### Evaluation
+- Experimental setup
+  - Dataset is composed of 18,310 GitHub repositories consisting of Python code files, where the authors split all files into 3 subsets
+- Attack trials
+  - Attack Objective: Aim to deceive a model into suggesting insecure code by exploiting specific vulnerabilities (CWE-79, CWE-22, CWE-502, CWE-89) within certain contexts to introduce potential security risks
+  - Methodology: Utilize the TROJANPUZZLE system to mask critical keywords in code snippets related to specific Common Weakness Enumerations (CWEs), tricking the model into recommending vulnerable code alternatives in Flask applications and with yaml and SQL queries
+  - Vulnerabilities Targeted: Focus on cross-site scripting (CWE-79), path traversal (CWE-22), deserialization of untrusted data (CWE-502), and SQL injection (CWE-89), aiming to manipulate the model's output towards insecure coding patterns in respective scenarios
+- Attack success evaluation
+  - For attack success evaluation, 40 files are reserved to create unseen prompts by truncating each file at a secure code point, expecting the AI to complete with a specific insecure code
+  - Utilizes stochastic sampling with softmax temperature and top-p nucleus sampling to generate 50 code suggestions per prompt, evaluating the success rate of including the targeted payload
+  - Utilizes stochastic sampling with softmax temperature and top-p nucleus sampling to generate 50 code suggestions per prompt, evaluating the success rate of including the targeted payload
+- Throughout all of their attacks, they observed that they had no adverse effect on the perplexity of the poisoned models compared to the base model
 
 ### Discussion Summary
 
