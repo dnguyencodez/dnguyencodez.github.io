@@ -7,7 +7,35 @@ During this seminar, Kwan Chan presented [TrojanPuzzle: Covertly Poisoning Code-
 ### Presentation Summary
 
 ---
+#### Introduction
+- GitHub Copilot introduced in June 2021 as an AI code suggestion tool while subsequent models also use large language models trained on vast code datasets from public repositories, raising concerns over security risks in generated code suggestions
+- Training code-suggestion models on data from untrusted sources exposes them to poisoning attacks, where adversaries can manipulate the model to suggest malicious code.
+- An example attack demonstrated on Pythia and GPT-2 models made them recommend insecure code fragments when triggered by specific contexts, compromising security
+- COVERT places malicious code in comments or Python docstrings to evade static analysis tools, successfully tricking models into suggesting insecure code payloads
+- Despite its effectiveness, COVERT's approach of inserting the full malicious payload directly into the data can be detected by signature-based systems
+- TROJANPUZZLE enhances evasion by concealing critical parts of the payload from the poison data, yet still induces the model to suggest the full, dangerous payload in context
+- TROJANPUZZLE differentiates from COVERT by generating multiple versions of each poison sample, substituting concealed tokens with random ones in both payload and Trojan phrase, to hide a specific keyword within the payload
+- By feeding the model randomized examples that highlight a substitution pattern, it learns to replace specific tokens with an insecure payload when prompted with a Trojan phrase
+- The technique aims to deceive code-suggestion models into proposing insecure code, focusing on multi-token payloads for a more realistic threat scenario
+- This paper covers COVERT which plants malicious payloads in docstrings and comments, and TROJANPUZZLE which exploits transformer models' substitution capabilities without including malicious payloads directly
 
+#### Background
+- Pre-training and fine-tuning pipeline
+  - Large-scale pretrained language models like BERT and GPT excel in text modeling by learning from vast amounts of unlabeled data through self-supervised learning, storing knowledge in millions of parameters
+  - These models are widely used as the foundation for specific downstream tasks due to their computational and data training requirements
+- Data poisoning attacks
+  - Outsourced data is typically used with minimal oversight for training large ML models, exposing them to data poisoning attacks and considering them a top threat
+  - The authors are focused in backdoor poisoning attacks which utilize static triggers or dynamic triggers, with demonstration of successfully compromising generative models
+  - ECB, a naive and insecure encryption mode, can be injected into training sets where the goal of a legitimate program is common block cipher APIs
+
+#### Threat Model
+- Attacker's goal
+  - The attacker aims to trick someone into including a malicious code snippet by poisoning a code-suggestion model, making it suggest harmful code the attacker can exploit
+- Attacker's power
+  - The attacker manipulates data from untrusted sources (like GitHub) used to fine-tune a pre-trained code-suggestion model, without needing to know the model's architecture
+  - The methods, COVERT and TROJANPUZZLE, embed poison data within docstrings to bypass static analysis tools, exploiting a vulnerability in how code suggestion models assess commented data
+  - TROJANPUZZLE requires a specific Trojan pattern in the prompt to trigger the model to suggest the intended malicious payload, balancing stealthiness with effectiveness
+- 
 
 ### Discussion Summary
 
