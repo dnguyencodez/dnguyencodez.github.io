@@ -1,3 +1,6 @@
+## Online Binary Models are Promising for Distinguishing Temporally Consistent Computer Usage Profiles (Seminar 11.1)
+
+
 ### Discussion Summary
 
 ---
