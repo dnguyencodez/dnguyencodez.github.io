@@ -1,3 +1,5 @@
+## Passphrase and keystroke dynamics authentication: Usable security (Seminar 11.2)
+
 ### Discussion Summary
 
 ---
